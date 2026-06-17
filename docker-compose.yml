@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: open_acs_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: open_acs
+      POSTGRES_PASSWORD: open_acs_password
+      POSTGRES_DB: open_acs
+    ports:
+      - "5432:5432"
+    volumes:
+      - open_acs_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  open_acs_postgres_data:
