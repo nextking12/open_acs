@@ -23,8 +23,20 @@ const course = {
         {
           title: "What Is a Physical Access Control System?",
           slug: "what-is-a-physical-access-control-system",
-          content:
-            "A physical access control system controls who can enter secured spaces such as buildings, rooms, gates, and cabinets. Most systems combine credentials, readers, controllers, door hardware, schedules, access levels, monitoring, and audit history.",
+          content: `A **physical access control system (PACS)** controls who can enter secured spaces such as buildings, rooms, gates, and cabinets.
+
+## Core building blocks
+
+Most systems combine a handful of cooperating parts:
+
+- **Credentials** — what a person presents (card, PIN, mobile, biometric)
+- **Readers** — capture the credential at the door
+- **Controllers** — make the actual grant/deny decision
+- **Door hardware** — locks, strikes, and sensors
+- **Schedules & access levels** — *who* may enter, and *when*
+- **Monitoring & audit history** — what happened, and when
+
+> Together these answer one question: *should this person be allowed through this door right now?*`,
         },
         {
           title: "Common ACS Architecture",

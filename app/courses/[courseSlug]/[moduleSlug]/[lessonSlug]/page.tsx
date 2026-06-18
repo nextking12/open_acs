@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { prisma } from "@/lib/prisma";
 
 type LessonPageProps = {
@@ -100,9 +102,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </header>
 
           <div className="p-8">
-            <p className="max-w-3xl text-lg leading-9 text-stone-200">
-              {lesson.content}
-            </p>
+            <div className="prose prose-invert prose-stone max-w-3xl prose-headings:text-white prose-a:text-amber-300 prose-strong:text-white prose-code:text-amber-200">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {lesson.content}
+              </ReactMarkdown>
+            </div>
           </div>
         </article>
 
