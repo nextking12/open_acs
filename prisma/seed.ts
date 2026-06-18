@@ -122,6 +122,14 @@ Most systems combine a handful of cooperating parts:
 };
 
 async function main() {
+  // Temporary stand-in for an authenticated user. Replaced by real login later.
+  await prisma.user.upsert({
+    where: { email: "dev@open-acs.local" },
+    update: {},
+    create: { email: "dev@open-acs.local", name: "Dev User" },
+  });
+  console.log("Seeded dev user: dev@open-acs.local");
+
   await prisma.course.upsert({
     where: { slug: course.slug },
     update: {
