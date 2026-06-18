@@ -28,14 +28,6 @@ export default function Home() {
               >
                 Browse courses
               </Link>
-              <a
-                href="https://www.siaonline.org/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-stone-700 px-6 text-sm font-semibold text-stone-200 transition hover:border-stone-500 hover:bg-stone-900"
-              >
-                Industry context
-              </a>
             </div>
           </div>
 
