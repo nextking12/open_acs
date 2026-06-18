@@ -81,6 +81,12 @@ export default async function CoursesPage() {
                           {course.description}
                         </p>
                       ) : null}
+                      <Link
+                        href={`/courses/${course.slug}`}
+                        className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-amber-300 px-5 text-sm font-semibold text-stone-950 transition hover:bg-amber-200"
+                      >
+                        View course
+                      </Link>
                       <dl className="mt-8 grid grid-cols-2 gap-4 text-sm">
                         <div className="rounded-2xl border border-stone-700 bg-black/20 p-4">
                           <dt className="text-stone-400">Modules</dt>
@@ -108,9 +114,12 @@ export default async function CoursesPage() {
                             className="flex items-center justify-between gap-4 py-4"
                           >
                             <div>
-                              <p className="font-medium text-white">
+                              <Link
+                                href={`/courses/${course.slug}/${module.slug}`}
+                                className="font-medium text-white transition hover:text-amber-200"
+                              >
                                 {module.order}. {module.title}
-                              </p>
+                              </Link>
                               <p className="mt-1 text-sm text-stone-400">
                                 {module._count.lessons} lessons
                               </p>
