@@ -1,10 +1,13 @@
+import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
-// Until real authentication exists, every request acts as this seeded user.
-// This is the single place to change when we add login (Step 2b), so the
-// rest of the app can keep calling getCurrentUser() unchanged.
-export const DEV_USER_EMAIL = "dev@open-acs.local";
-
+// Returns the logged-in user, or null if nobody is signed in. This is the same
+// seam the rest of the app already calls — only its implementation changed:
+// it now reads the real Auth.js session instead of a hardcoded dev user.
 export async function getCurrentUser() {
-  return prisma.user.findUnique({ where: { email: DEV_USER_EMAIL } });
+  const session = await auth();
+  if (!session?.user?.email) {
+    return null;
+  }
+  return prisma.user.findUnique({ where: { email: session.user.email } });
 }

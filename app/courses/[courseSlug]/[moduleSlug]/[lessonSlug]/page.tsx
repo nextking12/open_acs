@@ -124,25 +124,35 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </div>
 
           <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-stone-800 bg-stone-950 p-8">
-            <p className="text-sm font-medium text-stone-300">
-              {completed ? (
-                <span className="text-emerald-300">✓ You completed this lesson</span>
-              ) : (
-                "Not completed yet"
-              )}
-            </p>
-            <form action={toggleAction}>
-              <button
-                type="submit"
-                className={
-                  completed
-                    ? "inline-flex h-11 items-center justify-center rounded-full border border-stone-700 px-5 text-sm font-semibold text-stone-300 transition hover:border-stone-500 hover:text-white"
-                    : "inline-flex h-11 items-center justify-center rounded-full bg-amber-300 px-5 text-sm font-semibold text-stone-950 transition hover:bg-amber-200"
-                }
-              >
-                {completed ? "Mark as not done" : "Mark as complete"}
-              </button>
-            </form>
+            {user ? (
+              <>
+                <p className="text-sm font-medium text-stone-300">
+                  {completed ? (
+                    <span className="text-emerald-300">
+                      ✓ You completed this lesson
+                    </span>
+                  ) : (
+                    "Not completed yet"
+                  )}
+                </p>
+                <form action={toggleAction}>
+                  <button
+                    type="submit"
+                    className={
+                      completed
+                        ? "inline-flex h-11 items-center justify-center rounded-full border border-stone-700 px-5 text-sm font-semibold text-stone-300 transition hover:border-stone-500 hover:text-white"
+                        : "inline-flex h-11 items-center justify-center rounded-full bg-amber-300 px-5 text-sm font-semibold text-stone-950 transition hover:bg-amber-200"
+                    }
+                  >
+                    {completed ? "Mark as not done" : "Mark as complete"}
+                  </button>
+                </form>
+              </>
+            ) : (
+              <p className="text-sm text-stone-400">
+                Sign in to track your progress.
+              </p>
+            )}
           </footer>
         </article>
 
