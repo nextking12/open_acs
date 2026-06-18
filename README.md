@@ -1,37 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Open ACS
 
-## Getting Started
+Open ACS is a Next.js learning platform for physical access control systems. The current app has a small vertical slice: Postgres for storage, Prisma for the data layer, seed content for an access control fundamentals course, and a `/courses` page that reads from the database.
 
-First, run the development server:
+## Tech Stack
+
+- Next.js 16 with the App Router
+- React 19
+- Tailwind CSS 4
+- Prisma 7
+- Postgres 17 through Docker Compose
+- pnpm for package management
+
+## Local Setup
+
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a local environment file:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.example .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Start Postgres:
 
-## Learn More
+```bash
+docker compose up -d
+```
 
-To learn more about Next.js, take a look at the following resources:
+Generate the Prisma client:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm db:generate
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run database migrations:
 
-## Deploy on Vercel
+```bash
+pnpm db:migrate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Load the starter course content:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# open_acs
+```bash
+pnpm db:seed
+```
+
+Start the development server:
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+## Useful Commands
+
+```bash
+pnpm lint
+pnpm exec tsc --noEmit
+pnpm exec prisma validate
+pnpm build
+```
+
+## Database Notes
+
+The local database settings live in `.env`. The default values in `.env.example` match `docker-compose.yml`.
+
+Prisma schema changes should be made in `prisma/schema.prisma`, then applied with:
+
+```bash
+pnpm db:migrate
+```
+
+The generated Prisma client is written to `generated/prisma` and is ignored by git.
