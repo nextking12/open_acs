@@ -62,9 +62,12 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 ```bash
 pnpm lint
 pnpm exec tsc --noEmit
+pnpm test
 pnpm exec prisma validate
 pnpm build
 ```
+
+Tests run with [Vitest](https://vitest.dev/). Use `pnpm test:watch` for watch mode. GitHub Actions runs lint, typecheck, tests, and build on every push and pull request (see `.github/workflows/ci.yml`).
 
 ## Database Notes
 
