@@ -77,3 +77,7 @@ pnpm db:migrate
 ```
 
 The generated Prisma client is written to `generated/prisma` and is ignored by git.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
