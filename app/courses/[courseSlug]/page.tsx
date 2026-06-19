@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/currentUser";
+import { ProgressBar } from "@/components/ProgressBar";
 
 type CoursePageProps = {
   params: Promise<{
@@ -36,6 +38,25 @@ export default async function CoursePage({ params }: CoursePageProps) {
     0,
   );
 
+  const user = await getCurrentUser();
+  const completedLessonIds = new Set(
+    user
+      ? (
+          await prisma.lessonProgress.findMany({
+            where: { userId: user.id },
+            select: { lessonId: true },
+          })
+        ).map((progress) => progress.lessonId)
+      : [],
+  );
+  const completedCount = course.modules.reduce(
+    (total, module) =>
+      total +
+      module.lessons.filter((lesson) => completedLessonIds.has(lesson.id))
+        .length,
+    0,
+  );
+
   return (
     <main className="min-h-screen bg-stone-950 px-6 py-10 text-stone-100 sm:px-10 lg:px-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
@@ -66,6 +87,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
               {course.modules.length} modules and {lessonCount} lessons are
               available in this course.
             </p>
+            {user ? (
+              <ProgressBar completed={completedCount} total={lessonCount} />
+            ) : null}
           </div>
         </section>
 
