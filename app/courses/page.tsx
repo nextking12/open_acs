@@ -45,20 +45,13 @@ export default async function CoursesPage() {
           <span>Courses</span>
         </nav>
 
-        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div className="space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-amber-300">
-              Learning Catalog
-            </p>
-            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Physical access control courses, from fundamentals up.
-            </h1>
-          </div>
-          <p className="max-w-2xl text-base leading-8 text-stone-300 lg:justify-self-end">
-            Work through credentials, readers, controllers, door hardware,
-            schedules, access levels, events, and audit trails — and track your
-            progress as you complete each lesson.
+        <section className="space-y-5">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-amber-300">
+            Learning Catalog
           </p>
+          <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+            Physical access control courses, from fundamentals up.
+          </h1>
         </section>
 
         {courses.length === 0 ? (
