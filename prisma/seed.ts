@@ -10,6 +10,11 @@ if (!connectionString) {
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
+// A Markdown code fence is three backticks. Lesson content uses backtick
+// template literals, so we interpolate this constant to embed ```mermaid
+// blocks without prematurely closing the template literal.
+const FENCE = "```";
+
 const course = {
   title: "Physical Access Control Fundamentals",
   slug: "physical-access-control-fundamentals",
@@ -51,6 +56,17 @@ Most systems combine a handful of cooperating parts:
 - **Readers** — mounted at doors to capture credentials
 - **Door hardware** — electric locks, position switches, and request-to-exit devices
 - **Network** — connects the controllers to the management services
+
+## How it fits together
+
+${FENCE}mermaid
+flowchart LR
+  Admin["Management app"] --> DB[("Database")]
+  Card["Credential"] --> Reader
+  Reader --> Controller
+  Controller -->|grant| Lock["Door lock"]
+  Controller --> DB
+${FENCE}
 
 > The software defines *policy*; the controllers and door hardware *enforce* it — even when the network is down.`,
         },
@@ -96,6 +112,20 @@ Combining types — for example **card + PIN** — creates *multi-factor* access
 - **Protocol** — legacy **Wiegand** vs. the secure, supervised **OSDP**
 - **Encryption** — whether the card-to-reader exchange is protected
 - **Extras** — keypads for PINs, or biometric sensors
+
+## The flow, step by step
+
+${FENCE}mermaid
+sequenceDiagram
+  participant U as User
+  participant R as Reader
+  participant C as Controller
+  U->>R: Present credential
+  R->>C: Send credential data
+  C->>C: Look up and decide
+  C-->>R: Grant or deny
+  C->>Lock: Unlock (if granted)
+${FENCE}
 
 > Prefer **OSDP** over Wiegand for new installs: it supports encryption and detects tampering or cut wires.`,
         },
