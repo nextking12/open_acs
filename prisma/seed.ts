@@ -271,49 +271,53 @@ async function main() {
   });
   console.log("Seeded dev user: dev@open-acs.local");
 
-  await prisma.course.upsert({
+  // Upsert by stable unique slugs (course.slug, module [courseId, slug],
+  // lesson [moduleId, slug]) so re-seeding reuses the same rows/ids. That keeps
+  // LessonProgress intact — a delete-and-recreate would cascade-wipe progress.
+  const seededCourse = await prisma.course.upsert({
     where: { slug: course.slug },
-    update: {
-      title: course.title,
-      description: course.description,
-      modules: {
-        deleteMany: {},
-        create: course.modules.map((module, moduleIndex) => ({
-          title: module.title,
-          slug: module.slug,
-          order: moduleIndex + 1,
-          lessons: {
-            create: module.lessons.map((lesson, lessonIndex) => ({
-              title: lesson.title,
-              slug: lesson.slug,
-              content: lesson.content,
-              order: lessonIndex + 1,
-            })),
-          },
-        })),
-      },
-    },
+    update: { title: course.title, description: course.description },
     create: {
       title: course.title,
       slug: course.slug,
       description: course.description,
-      modules: {
-        create: course.modules.map((module, moduleIndex) => ({
-          title: module.title,
-          slug: module.slug,
-          order: moduleIndex + 1,
-          lessons: {
-            create: module.lessons.map((lesson, lessonIndex) => ({
-              title: lesson.title,
-              slug: lesson.slug,
-              content: lesson.content,
-              order: lessonIndex + 1,
-            })),
-          },
-        })),
-      },
     },
   });
+
+  for (const [moduleIndex, module] of course.modules.entries()) {
+    const seededModule = await prisma.module.upsert({
+      where: {
+        courseId_slug: { courseId: seededCourse.id, slug: module.slug },
+      },
+      update: { title: module.title, order: moduleIndex + 1 },
+      create: {
+        title: module.title,
+        slug: module.slug,
+        order: moduleIndex + 1,
+        courseId: seededCourse.id,
+      },
+    });
+
+    for (const [lessonIndex, lesson] of module.lessons.entries()) {
+      await prisma.lesson.upsert({
+        where: {
+          moduleId_slug: { moduleId: seededModule.id, slug: lesson.slug },
+        },
+        update: {
+          title: lesson.title,
+          content: lesson.content,
+          order: lessonIndex + 1,
+        },
+        create: {
+          title: lesson.title,
+          slug: lesson.slug,
+          content: lesson.content,
+          order: lessonIndex + 1,
+          moduleId: seededModule.id,
+        },
+      });
+    }
+  }
 
   console.log(`Seeded course: ${course.title}`);
 }
