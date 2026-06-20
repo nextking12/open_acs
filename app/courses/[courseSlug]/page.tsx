@@ -81,16 +81,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
               {course.title}
             </h1>
           </div>
-          <div className="space-y-4 text-base leading-8 text-stone-300 lg:justify-self-end">
-            {course.description ? <p>{course.description}</p> : null}
-            <p>
-              {course.modules.length} modules and {lessonCount} lessons are
-              available in this course.
-            </p>
-            {user ? (
+          {user ? (
+            <div className="w-full lg:justify-self-end">
               <ProgressBar completed={completedCount} total={lessonCount} />
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </section>
 
         <section className="grid gap-6">
