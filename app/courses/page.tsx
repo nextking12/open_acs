@@ -51,24 +51,23 @@ export default async function CoursesPage() {
               Learning Catalog
             </p>
             <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Physical access control courses backed by Postgres.
+              Physical access control courses, from fundamentals up.
             </h1>
           </div>
           <p className="max-w-2xl text-base leading-8 text-stone-300 lg:justify-self-end">
-            These courses are loaded through Prisma from your local database.
-            This is the first full vertical slice: Postgres, Prisma, Next.js,
-            and the browser working together.
+            Work through credentials, readers, controllers, door hardware,
+            schedules, access levels, events, and audit trails — and track your
+            progress as you complete each lesson.
           </p>
         </section>
 
         {courses.length === 0 ? (
           <section className="rounded-3xl border border-dashed border-stone-700 bg-stone-900/70 p-8">
             <h2 className="text-2xl font-semibold text-white">
-              No courses found
+              No courses available yet
             </h2>
             <p className="mt-3 text-stone-300">
-              Run <code className="text-amber-200">pnpm db:seed</code> to load
-              the starter access control course.
+              New access control courses are on the way — check back soon.
             </p>
           </section>
         ) : (
@@ -141,24 +140,16 @@ export default async function CoursesPage() {
                       </h3>
                       <ol className="mt-5 divide-y divide-stone-800">
                         {course.modules.map((module) => (
-                          <li
-                            key={module.id}
-                            className="flex items-center justify-between gap-4 py-4"
-                          >
-                            <div>
-                              <Link
-                                href={`/courses/${course.slug}/${module.slug}`}
-                                className="font-medium text-white transition hover:text-amber-200"
-                              >
-                                {module.order}. {module.title}
-                              </Link>
-                              <p className="mt-1 text-sm text-stone-400">
-                                {module.lessons.length} lessons
-                              </p>
-                            </div>
-                            <span className="rounded-full border border-stone-700 px-3 py-1 text-xs font-medium text-stone-300">
-                              {module.slug}
-                            </span>
+                          <li key={module.id} className="py-4">
+                            <Link
+                              href={`/courses/${course.slug}/${module.slug}`}
+                              className="font-medium text-white transition hover:text-amber-200"
+                            >
+                              {module.order}. {module.title}
+                            </Link>
+                            <p className="mt-1 text-sm text-stone-400">
+                              {module.lessons.length} lessons
+                            </p>
                           </li>
                         ))}
                       </ol>
