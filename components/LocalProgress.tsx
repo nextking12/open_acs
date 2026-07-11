@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useSyncExternalStore } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { ProgressBar } from "./ProgressBar";
 
 const STORAGE_KEY = "open-acs:completed-lessons";
@@ -25,7 +25,7 @@ function subscribe(onStoreChange: () => void) {
   };
 }
 
-function useCompletedLessonIds() {
+export function useCompletedLessonIds() {
   const storedProgress = useSyncExternalStore(
     subscribe,
     getSnapshot,
@@ -95,19 +95,30 @@ export function LocalCompletionMark({ lessonId }: { lessonId: string }) {
 export function LocalLessonCompletion({ lessonId }: { lessonId: string }) {
   const completedLessonIds = useCompletedLessonIds();
   const completed = completedLessonIds.has(lessonId);
+  const [celebrating, setCelebrating] = useState(false);
+
+  function handleClick() {
+    toggleLesson(lessonId, completedLessonIds);
+    if (!completed) {
+      setCelebrating(true);
+      setTimeout(() => setCelebrating(false), 600);
+    }
+  }
 
   return (
     <>
       <p className="text-sm font-medium text-stone-300">
         {completed ? (
-          <span className="text-emerald-300">✓ You completed this lesson</span>
+          <span className={celebrating ? "celebrate inline-block text-emerald-300" : "text-emerald-300"}>
+            ✓ You completed this lesson
+          </span>
         ) : (
           "Not completed yet"
         )}
       </p>
       <button
         type="button"
-        onClick={() => toggleLesson(lessonId, completedLessonIds)}
+        onClick={handleClick}
         className={
           completed
             ? "inline-flex h-11 items-center justify-center rounded-full border border-stone-700 px-5 text-sm font-semibold text-stone-300 transition hover:border-stone-500 hover:text-white"

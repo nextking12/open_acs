@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { LocalProgressBar } from "@/components/LocalProgress";
+import { LocalProgressBar, LocalProgressSummary } from "@/components/LocalProgress";
 
 type CoursePageProps = {
   params: Promise<{
@@ -79,6 +79,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
                   <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">
                     {module.title}
                   </h2>
+                  <div className="mt-3">
+                    <LocalProgressSummary lessonIds={module.lessons.map((l) => l.id)} />
+                  </div>
                   <Link
                     href={`/courses/${course.slug}/${module.slug}`}
                     className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-amber-300/50 px-5 text-sm font-semibold text-amber-200 transition hover:border-amber-200 hover:text-amber-100"

@@ -3,6 +3,7 @@
 import { isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 import { Mermaid } from "./Mermaid";
 
 // A fenced code block (```lang) renders as <pre><code class="language-lang">.
@@ -25,7 +26,11 @@ const components: Components = {
 
 export function LessonContent({ content }: { content: string }) {
   return (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
+      components={components}
+    >
       {content}
     </ReactMarkdown>
   );

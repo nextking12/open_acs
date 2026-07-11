@@ -14,8 +14,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://open-acs.vercel.app"),
   title: "Open ACS",
   description: "A learning platform for physical access control systems.",
+  openGraph: {
+    title: "Open ACS",
+    description: "Learn how real access control systems are built and operated.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Open ACS",
+    description: "Learn how real access control systems are built and operated.",
+  },
 };
 
 export default function RootLayout({
