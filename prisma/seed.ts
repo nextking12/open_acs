@@ -263,17 +263,8 @@ Events drive **real-time monitoring** and alarms, and they accumulate into the h
 };
 
 async function main() {
-  // Temporary stand-in for an authenticated user. Replaced by real login later.
-  await prisma.user.upsert({
-    where: { email: "dev@open-acs.local" },
-    update: {},
-    create: { email: "dev@open-acs.local", name: "Dev User" },
-  });
-  console.log("Seeded dev user: dev@open-acs.local");
-
   // Upsert by stable unique slugs (course.slug, module [courseId, slug],
-  // lesson [moduleId, slug]) so re-seeding reuses the same rows/ids. That keeps
-  // LessonProgress intact — a delete-and-recreate would cascade-wipe progress.
+  // lesson [moduleId, slug]) so re-seeding reuses the same rows and IDs.
   const seededCourse = await prisma.course.upsert({
     where: { slug: course.slug },
     update: { title: course.title, description: course.description },

@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/currentUser";
+import {
+  LocalCompletionMark,
+  LocalProgressSummary,
+} from "@/components/LocalProgress";
 
 type ModulePageProps = {
   params: Promise<{
@@ -35,23 +38,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
     notFound();
   }
 
-  const user = await getCurrentUser();
-  const completedLessonIds = new Set(
-    user
-      ? (
-          await prisma.lessonProgress.findMany({
-            where: {
-              userId: user.id,
-              lessonId: { in: courseModule.lessons.map((lesson) => lesson.id) },
-            },
-            select: { lessonId: true },
-          })
-        ).map((progress) => progress.lessonId)
-      : [],
-  );
-  const completedCount = courseModule.lessons.filter((lesson) =>
-    completedLessonIds.has(lesson.id),
-  ).length;
+  const lessonIds = courseModule.lessons.map((lesson) => lesson.id);
 
   return (
     <main className="min-h-screen bg-stone-950 px-6 py-10 text-stone-100 sm:px-10 lg:px-16">
@@ -86,9 +73,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
             Start with the first lesson, or jump directly to any lesson in this
             module.
           </p>
-          <p className="text-sm font-medium text-emerald-300">
-            {completedCount} of {courseModule.lessons.length} lessons complete
-          </p>
+          <LocalProgressSummary lessonIds={lessonIds} />
         </section>
 
         <section className="overflow-hidden rounded-3xl border border-stone-800 bg-stone-900 shadow-2xl shadow-black/30">
@@ -104,9 +89,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
                       Lesson {lesson.order}
                     </p>
                     <h2 className="mt-2 text-xl font-semibold text-white">
-                      {completedLessonIds.has(lesson.id) ? (
-                        <span className="mr-2 text-emerald-300">✓</span>
-                      ) : null}
+                      <LocalCompletionMark lessonId={lesson.id} />
                       {lesson.title}
                     </h2>
                   </div>
