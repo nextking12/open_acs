@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/currentUser";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const user = await getCurrentUser();
-
   // Pull the first course and its modules so the outline below always reflects
   // the seeded curriculum instead of a hard-coded list that can drift.
   const course = await prisma.course.findFirst({
@@ -50,11 +49,9 @@ export default async function Home() {
                 Browse courses
               </Link>
             </div>
-            {!user ? (
-              <p className="text-sm text-stone-400">
-                Sign in to track your progress as you complete each lesson.
-              </p>
-            ) : null}
+            <p className="text-sm text-stone-400">
+              Track lesson progress privately in your browser—no account needed.
+            </p>
           </div>
 
           <div className="rounded-[2rem] border border-stone-800 bg-stone-900/80 p-6 shadow-2xl shadow-black/40">

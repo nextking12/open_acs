@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/currentUser";
-import { ProgressBar } from "@/components/ProgressBar";
+import { LocalProgressBar } from "@/components/LocalProgress";
 
 type CoursePageProps = {
   params: Promise<{
@@ -33,28 +32,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
     notFound();
   }
 
-  const lessonCount = course.modules.reduce(
-    (total, module) => total + module.lessons.length,
-    0,
-  );
-
-  const user = await getCurrentUser();
-  const completedLessonIds = new Set(
-    user
-      ? (
-          await prisma.lessonProgress.findMany({
-            where: { userId: user.id },
-            select: { lessonId: true },
-          })
-        ).map((progress) => progress.lessonId)
-      : [],
-  );
-  const completedCount = course.modules.reduce(
-    (total, module) =>
-      total +
-      module.lessons.filter((lesson) => completedLessonIds.has(lesson.id))
-        .length,
-    0,
+  const lessonIds = course.modules.flatMap((module) =>
+    module.lessons.map((lesson) => lesson.id),
   );
 
   return (
@@ -81,11 +60,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
               {course.title}
             </h1>
           </div>
-          {user ? (
-            <div className="w-full lg:justify-self-end">
-              <ProgressBar completed={completedCount} total={lessonCount} />
-            </div>
-          ) : null}
+          <div className="w-full lg:justify-self-end">
+            <LocalProgressBar lessonIds={lessonIds} />
+          </div>
         </section>
 
         <section className="grid gap-6">

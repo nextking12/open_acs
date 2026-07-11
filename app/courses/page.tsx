@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/currentUser";
-import { ProgressBar } from "@/components/ProgressBar";
+import { LocalProgressBar } from "@/components/LocalProgress";
 
 export const dynamic = "force-dynamic";
 
@@ -19,20 +18,6 @@ export default async function CoursesPage() {
       },
     },
   });
-
-  // Pull every lesson the current user has finished, once, into a Set for fast
-  // membership checks below. Empty when nobody is signed in.
-  const user = await getCurrentUser();
-  const completedLessonIds = new Set(
-    user
-      ? (
-          await prisma.lessonProgress.findMany({
-            where: { userId: user.id },
-            select: { lessonId: true },
-          })
-        ).map((progress) => progress.lessonId)
-      : [],
-  );
 
   return (
     <main className="min-h-screen bg-stone-950 px-6 py-10 text-stone-100 sm:px-10 lg:px-16">
@@ -70,13 +55,8 @@ export default async function CoursesPage() {
                 (total, module) => total + module.lessons.length,
                 0,
               );
-              const completedCount = course.modules.reduce(
-                (total, module) =>
-                  total +
-                  module.lessons.filter((lesson) =>
-                    completedLessonIds.has(lesson.id),
-                  ).length,
-                0,
+              const lessonIds = course.modules.flatMap((module) =>
+                module.lessons.map((lesson) => lesson.id),
               );
 
               return (
@@ -117,14 +97,9 @@ export default async function CoursesPage() {
                           </dd>
                         </div>
                       </dl>
-                      {user ? (
-                        <div className="mt-8">
-                          <ProgressBar
-                            completed={completedCount}
-                            total={lessonCount}
-                          />
-                        </div>
-                      ) : null}
+                      <div className="mt-8">
+                        <LocalProgressBar lessonIds={lessonIds} />
+                      </div>
                     </div>
 
                     <div className="p-8">

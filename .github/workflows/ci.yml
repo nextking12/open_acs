@@ -9,13 +9,11 @@ jobs:
   verify:
     runs-on: ubuntu-latest
 
-    # Dummy values so modules that read them at import time (the Prisma client
-    # in lib/prisma.ts, Auth.js in auth.ts) don't throw during typecheck/build.
+    # A dummy value lets the Prisma client initialize during typecheck/build.
     # No real database is contacted: every page is dynamic and these tests do
     # not hit the database.
     env:
       DATABASE_URL: postgresql://user:password@localhost:5432/open_acs
-      AUTH_SECRET: ci-placeholder-secret
 
     steps:
       - uses: actions/checkout@v4
