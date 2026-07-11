@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { estimateReadingTime } from "@/lib/readingTime";
 import { LessonContent } from "@/components/LessonContent";
 import { LocalLessonCompletion } from "@/components/LocalProgress";
-import { LessonSidebar } from "@/components/LessonSidebar";
 import { LessonKeyboardNav } from "@/components/LessonKeyboardNav";
 import { BackToTop } from "@/components/BackToTop";
 
@@ -51,16 +50,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
     notFound();
   }
 
-  const sidebarModules = course.modules.map((moduleItem) => ({
-    title: moduleItem.title,
-    slug: moduleItem.slug,
-    lessons: moduleItem.lessons.map((lessonItem) => ({
-      id: lessonItem.id,
-      title: lessonItem.title,
-      href: `/courses/${course.slug}/${moduleItem.slug}/${lessonItem.slug}`,
-    })),
-  }));
-
   const lessonPath = course.modules.flatMap((moduleItem) =>
     moduleItem.lessons.map((lessonItem) => ({
       title: lessonItem.title,
@@ -85,17 +74,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         nextHref={nextLesson?.href}
       />
       <BackToTop />
-      <div className="mx-auto flex w-full max-w-6xl gap-10">
-        <aside className="hidden w-56 shrink-0 lg:block">
-          <div className="sticky top-10 max-h-[calc(100vh-5rem)] overflow-y-auto rounded-2xl border border-stone-800 bg-stone-900/50 p-4">
-            <LessonSidebar
-              modules={sidebarModules}
-              currentLessonId={lesson.id}
-            />
-          </div>
-        </aside>
-
-        <div className="min-w-0 flex-1 flex-col gap-10">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-10">
           <nav className="text-sm text-stone-400">
             <Link href="/" className="transition hover:text-amber-300">
               Home
@@ -181,7 +160,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
               </div>
             )}
           </nav>
-        </div>
       </div>
     </main>
   );
