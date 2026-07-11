@@ -22,9 +22,6 @@ export default async function Home() {
         <div className="absolute inset-x-6 top-8 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-8">
-            <div className="inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm font-medium text-amber-200">
-              Physical Access Control Training
-            </div>
             <div className="space-y-5">
               <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
                 Learn how real access control systems are built and operated.
