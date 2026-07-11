@@ -16,10 +16,6 @@ export default async function Home() {
     },
   });
 
-  const lessonCount =
-    course?.modules.reduce((total, module) => total + module._count.lessons, 0) ??
-    0;
-
   return (
     <main className="min-h-screen overflow-hidden bg-stone-950 text-stone-100">
       <section className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 py-16 sm:px-10 lg:px-16">
@@ -58,9 +54,6 @@ export default async function Home() {
             <div className="rounded-[1.5rem] border border-stone-700 bg-black/30 p-6">
               {course ? (
                 <>
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-300">
-                    {course.modules.length} modules · {lessonCount} lessons
-                  </p>
                   <p className="mt-3 text-lg font-semibold text-white">
                     {course.title}
                   </p>
