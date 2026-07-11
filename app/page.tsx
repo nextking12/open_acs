@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   // Pull the first course and its modules so the outline below always reflects
   // the seeded curriculum instead of a hard-coded list that can drift.

@@ -32,11 +32,6 @@ export default async function CoursePage({ params }: CoursePageProps) {
     notFound();
   }
 
-  const lessonCount = course.modules.reduce(
-    (total, module) => total + module.lessons.length,
-    0,
-  );
-
   const lessonIds = course.modules.flatMap((module) =>
     module.lessons.map((lesson) => lesson.id),
   );
