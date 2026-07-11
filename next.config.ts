@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -19,6 +21,7 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   async headers() {
+    if (!isProduction) return [];
     return [
       {
         source: "/(.*)",
