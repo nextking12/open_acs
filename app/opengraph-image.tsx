@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Open ACS — Physical Access Control Training";
+export const alt = "PhySec.Learn — Physical Access Control Training";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,7 +35,7 @@ export default function OGImage() {
           Physical Access Control Training
         </div>
         <div style={{ display: "flex", fontSize: 80, fontWeight: 700, textAlign: "center" }}>
-          Open ACS
+          PhySec.Learn
         </div>
         <div
           style={{

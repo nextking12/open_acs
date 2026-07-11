@@ -3,8 +3,8 @@
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { ProgressBar } from "./ProgressBar";
 
-const STORAGE_KEY = "open-acs:completed-lessons";
-const CHANGE_EVENT = "open-acs:progress-change";
+const STORAGE_KEY = "physec-learn:completed-lessons";
+const CHANGE_EVENT = "physec-learn:progress-change";
 const EMPTY_PROGRESS = "[]";
 
 function getSnapshot() {

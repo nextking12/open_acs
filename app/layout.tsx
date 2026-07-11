@@ -14,17 +14,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://open-acs.vercel.app"),
-  title: "Open ACS",
+  metadataBase: new URL("https://physec-learn.vercel.app"),
+  title: "PhySec.Learn",
   description: "A learning platform for physical access control systems.",
   openGraph: {
-    title: "Open ACS",
+    title: "PhySec.Learn",
     description: "Learn how real access control systems are built and operated.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Open ACS",
+    title: "PhySec.Learn",
     description: "Learn how real access control systems are built and operated.",
   },
 };
@@ -42,7 +42,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-stone-950 text-stone-100">
         <header className="flex items-center justify-between border-b border-stone-800 px-6 py-3 text-sm sm:px-10 lg:px-16">
           <Link href="/" className="font-semibold text-white">
-            Open ACS
+            PhySec.Learn
           </Link>
           <span className="text-stone-400">Progress saves in this browser</span>
         </header>

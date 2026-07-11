@@ -5,7 +5,7 @@ import {
   LocalProgressBar,
 } from "./LocalProgress";
 
-const STORAGE_KEY = "open-acs:completed-lessons";
+const STORAGE_KEY = "physec-learn:completed-lessons";
 
 describe("browser-local lesson progress", () => {
   beforeEach(() => {

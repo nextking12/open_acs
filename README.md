@@ -1,6 +1,6 @@
-# Open ACS
+# PhySec.Learn
 
-Open ACS is a Next.js learning platform for physical access control systems. Postgres and Prisma store the published curriculum, while lesson completion is kept privately in each visitor's browser. No account is required.
+PhySec.Learn is a Next.js learning platform for physical access control systems. Postgres and Prisma store the published curriculum, while lesson completion is kept privately in each visitor's browser. No account is required.
 
 ## Tech Stack
 

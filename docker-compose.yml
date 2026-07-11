@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:17
-    container_name: open_acs_postgres
+    container_name: physec_learn_postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -10,7 +10,7 @@ services:
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
-      - open_acs_postgres_data:/var/lib/postgresql/data
+      - physec_learn_postgres_data:/var/lib/postgresql/data
 
 volumes:
-  open_acs_postgres_data:
+  physec_learn_postgres_data:

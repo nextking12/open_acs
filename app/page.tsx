@@ -13,7 +13,7 @@ export default function Home() {
               Learn how real access control systems are built and operated.
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-stone-300">
-              Open ACS is a free, hands-on course covering the building blocks
+              PhySec.Learn is a free, hands-on course covering the building blocks
               of physical access control — credentials, readers, controllers,
               door hardware, schedules, access levels, events, and audit
               trails. Start from the fundamentals and track your progress as

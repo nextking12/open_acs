@@ -13,7 +13,7 @@ jobs:
     # No real database is contacted: every page is dynamic and these tests do
     # not hit the database.
     env:
-      DATABASE_URL: postgresql://user:password@localhost:5432/open_acs
+      DATABASE_URL: postgresql://user:password@localhost:5432/physec_learn
 
     steps:
       - uses: actions/checkout@v4
