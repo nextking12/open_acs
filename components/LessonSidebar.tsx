@@ -28,7 +28,7 @@ export function LessonSidebar({
     <nav aria-label="Course lessons" className="space-y-6">
       {modules.map((moduleItem) => (
         <div key={moduleItem.slug}>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
             {moduleItem.title}
           </p>
           <ol className="mt-3 space-y-1">
@@ -43,8 +43,8 @@ export function LessonSidebar({
                     aria-current={isCurrent ? "page" : undefined}
                     className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition ${
                       isCurrent
-                        ? "bg-amber-300/10 font-medium text-amber-200"
-                        : "text-stone-400 hover:bg-stone-800/60 hover:text-stone-200"
+                        ? "bg-[#e4d3bf]/10 font-medium text-[#efe3d4]"
+                        : "text-zinc-400 hover:bg-zinc-900/60 hover:text-zinc-200"
                     }`}
                   >
                     {isCompleted ? (
@@ -52,7 +52,7 @@ export function LessonSidebar({
                         ✓
                       </span>
                     ) : (
-                      <span className="mt-0.5 shrink-0 h-3 w-3 rounded-full border border-stone-700" aria-hidden="true" />
+                      <span className="mt-0.5 shrink-0 h-3 w-3 rounded-full border border-zinc-700" aria-hidden="true" />
                     )}
                     <span>{lesson.title}</span>
                   </Link>

@@ -39,12 +39,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-stone-950 text-stone-100">
-        <header className="flex items-center justify-between border-b border-stone-800 px-6 py-3 text-sm sm:px-10 lg:px-16">
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <header className="flex items-center justify-between border-b border-zinc-800/80 bg-black/70 px-6 py-3 text-sm backdrop-blur-sm sm:px-10 lg:px-16">
           <Link href="/" className="font-semibold text-white">
             PhySec.Learn
           </Link>
-          <span className="text-stone-400">Progress saves in this browser</span>
+          <span className="text-zinc-400">Progress saves in this browser</span>
         </header>
         {children}
       </body>

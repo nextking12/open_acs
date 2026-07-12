@@ -15,8 +15,8 @@ export default function OGImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0c0a09",
-          color: "#f5f5f4",
+          backgroundColor: "#040404",
+          color: "#e6edf7",
           fontSize: 72,
           fontFamily: "sans-serif",
           padding: "80px",
@@ -26,7 +26,7 @@ export default function OGImage() {
           style={{
             display: "flex",
             fontSize: 28,
-            color: "#fcd34d",
+            color: "#e4d3bf",
             letterSpacing: "0.3em",
             textTransform: "uppercase",
             marginBottom: 24,
@@ -41,7 +41,7 @@ export default function OGImage() {
           style={{
             display: "flex",
             fontSize: 32,
-            color: "#a8a29e",
+            color: "#94a3b8",
             marginTop: 24,
             textAlign: "center",
             maxWidth: 800,

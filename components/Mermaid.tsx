@@ -64,7 +64,7 @@ export function Mermaid({ chart }: { chart: string }) {
   }
 
   if (!svg) {
-    return <div className="my-6 text-sm text-stone-500">Rendering diagram…</div>;
+    return <div className="my-6 text-sm text-zinc-500">Rendering diagram...</div>;
   }
 
   // `not-prose` keeps Tailwind Typography from restyling the sanitized SVG.

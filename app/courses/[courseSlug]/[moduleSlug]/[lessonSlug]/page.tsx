@@ -68,98 +68,94 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const readingTime = estimateReadingTime(lesson.content);
 
   return (
-    <main className="min-h-screen bg-stone-950 px-6 py-10 text-stone-100 sm:px-10 lg:px-16">
+    <main className="min-h-screen bg-background px-6 py-10 text-foreground sm:px-10 lg:px-16">
       <LessonKeyboardNav
         prevHref={previousLesson?.href}
         nextHref={nextLesson?.href}
       />
       <BackToTop />
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-10">
-          <nav className="text-sm text-stone-400">
-            <Link href="/" className="transition hover:text-amber-300">
-              Home
-            </Link>
-            <span className="mx-2 text-stone-600">/</span>
-            <Link href="/courses" className="transition hover:text-amber-300">
-              Courses
-            </Link>
-            <span className="mx-2 text-stone-600">/</span>
-            <Link
-              href={`/courses/${course.slug}`}
-              className="transition hover:text-amber-300"
-            >
-              {course.title}
-            </Link>
-            <span className="mx-2 text-stone-600">/</span>
-            <Link
-              href={`/courses/${course.slug}/${courseModule.slug}`}
-              className="transition hover:text-amber-300"
-            >
-              {courseModule.title}
-            </Link>
-            <span className="mx-2 text-stone-600">/</span>
-            <span>{lesson.title}</span>
-          </nav>
+        <nav className="text-sm text-zinc-400">
+          <Link href="/" className="transition hover:text-[#e4d3bf]">
+            Home
+          </Link>
+          <span className="mx-2 text-zinc-600">/</span>
+          <Link href="/courses" className="transition hover:text-[#e4d3bf]">
+            Courses
+          </Link>
+          <span className="mx-2 text-zinc-600">/</span>
+          <Link
+            href={`/courses/${course.slug}`}
+            className="transition hover:text-[#e4d3bf]"
+          >
+            {course.title}
+          </Link>
+          <span className="mx-2 text-zinc-600">/</span>
+          <Link
+            href={`/courses/${course.slug}/${courseModule.slug}`}
+            className="transition hover:text-[#e4d3bf]"
+          >
+            {courseModule.title}
+          </Link>
+          <span className="mx-2 text-zinc-600">/</span>
+          <span>{lesson.title}</span>
+        </nav>
 
-          <article className="overflow-hidden rounded-3xl border border-stone-800 bg-stone-900 shadow-2xl shadow-black/30">
-            <header className="border-b border-stone-800 bg-stone-950 p-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-amber-300">
-                Module {courseModule.order} / Lesson {lesson.order}
-              </p>
-              <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                {lesson.title}
-              </h1>
-              <p className="mt-3 text-sm text-stone-500">
-                {readingTime} min read
-              </p>
-            </header>
+        <article className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950/90 shadow-2xl shadow-black/30">
+          <header className="border-b border-zinc-800 bg-black p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#e4d3bf]">
+              Module {courseModule.order} / Lesson {lesson.order}
+            </p>
+            <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+              {lesson.title}
+            </h1>
+            <p className="mt-3 text-sm text-zinc-500">{readingTime} min read</p>
+          </header>
 
-            <div className="p-8">
-              <div className="prose prose-invert prose-stone max-w-3xl prose-headings:text-white prose-a:text-amber-300 prose-strong:text-white prose-code:text-amber-200">
-                <LessonContent content={lesson.content} />
-              </div>
+          <div className="p-8">
+            <div className="prose prose-invert prose-zinc max-w-3xl prose-headings:text-white prose-a:text-[#e4d3bf] prose-strong:text-white prose-code:text-[#efe3d4]">
+              <LessonContent content={lesson.content} />
             </div>
+          </div>
 
-            <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-stone-800 bg-stone-950 p-8">
-              <LocalLessonCompletion lessonId={lesson.id} />
-            </footer>
-          </article>
+          <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-zinc-800 bg-black p-8">
+            <LocalLessonCompletion lessonId={lesson.id} />
+          </footer>
+        </article>
 
-          <nav className="grid gap-4 sm:grid-cols-2" aria-label="Lesson navigation">
-            {previousLesson ? (
-              <Link
-                href={previousLesson.href}
-                className="rounded-3xl border border-stone-800 bg-stone-900 p-5 transition hover:border-amber-300/50"
-              >
-                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-stone-500">
-                  ← Previous
-                </p>
-                <p className="mt-2 font-medium text-white">
-                  {previousLesson.title}
-                </p>
-              </Link>
-            ) : (
-              <div className="rounded-3xl border border-dashed border-stone-800 p-5 text-stone-600">
-                First lesson
-              </div>
-            )}
+        <nav className="grid gap-4 sm:grid-cols-2" aria-label="Lesson navigation">
+          {previousLesson ? (
+            <Link
+              href={previousLesson.href}
+              className="rounded-3xl border border-zinc-800 bg-zinc-950/90 p-5 transition hover:border-[#e4d3bf]/50"
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-500">
+                ← Previous
+              </p>
+              <p className="mt-2 font-medium text-white">{previousLesson.title}</p>
+            </Link>
+          ) : (
+            <div className="rounded-3xl border border-dashed border-zinc-800 p-5 text-zinc-600">
+              First lesson
+            </div>
+          )}
 
-            {nextLesson ? (
-              <Link
-                href={nextLesson.href}
-                className="rounded-3xl border border-stone-800 bg-stone-900 p-5 text-right transition hover:border-amber-300/50"
-              >
-                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-stone-500">
-                  Next →
-                </p>
-                <p className="mt-2 font-medium text-white">{nextLesson.title}</p>
-              </Link>
-            ) : (
-              <div className="rounded-3xl border border-dashed border-stone-800 p-5 text-right text-stone-600">
-                Last lesson
-              </div>
-            )}
-          </nav>
+          {nextLesson ? (
+            <Link
+              href={nextLesson.href}
+              className="rounded-3xl border border-zinc-800 bg-zinc-950/90 p-5 text-right transition hover:border-[#e4d3bf]/50"
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-500">
+                Next →
+              </p>
+              <p className="mt-2 font-medium text-white">{nextLesson.title}</p>
+            </Link>
+          ) : (
+            <div className="rounded-3xl border border-dashed border-zinc-800 p-5 text-right text-zinc-600">
+              Last lesson
+            </div>
+          )}
+        </nav>
       </div>
     </main>
   );

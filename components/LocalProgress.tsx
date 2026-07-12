@@ -76,7 +76,7 @@ export function LocalProgressSummary({ lessonIds }: { lessonIds: string[] }) {
   const completed = lessonIds.filter((id) => completedLessonIds.has(id)).length;
 
   return (
-    <p className="text-sm font-medium text-emerald-300">
+    <p className="text-sm font-medium text-[#efe3d4]">
       {completed} of {lessonIds.length} lessons complete
     </p>
   );
@@ -86,7 +86,7 @@ export function LocalCompletionMark({ lessonId }: { lessonId: string }) {
   const completedLessonIds = useCompletedLessonIds();
 
   return completedLessonIds.has(lessonId) ? (
-    <span className="mr-2 text-emerald-300" aria-label="Completed">
+    <span className="mr-2 text-emerald-400" aria-label="Completed">
       ✓
     </span>
   ) : null;
@@ -107,9 +107,9 @@ export function LocalLessonCompletion({ lessonId }: { lessonId: string }) {
 
   return (
     <>
-      <p className="text-sm font-medium text-stone-300">
+      <p className="text-sm font-medium text-zinc-300">
         {completed ? (
-          <span className={celebrating ? "celebrate inline-block text-emerald-300" : "text-emerald-300"}>
+          <span className={celebrating ? "celebrate inline-block text-emerald-400" : "text-emerald-400"}>
             ✓ You completed this lesson
           </span>
         ) : (
@@ -121,8 +121,8 @@ export function LocalLessonCompletion({ lessonId }: { lessonId: string }) {
         onClick={handleClick}
         className={
           completed
-            ? "inline-flex h-11 items-center justify-center rounded-full border border-stone-700 px-5 text-sm font-semibold text-stone-300 transition hover:border-stone-500 hover:text-white"
-            : "inline-flex h-11 items-center justify-center rounded-full bg-amber-300 px-5 text-sm font-semibold text-stone-950 transition hover:bg-amber-200"
+            ? "inline-flex h-11 items-center justify-center rounded-full border border-zinc-700 px-5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:text-white"
+            : "inline-flex h-11 items-center justify-center rounded-full bg-[#e4d3bf] px-5 text-sm font-semibold text-zinc-950 transition hover:bg-[#efe3d4]"
         }
       >
         {completed ? "Mark as not done" : "Mark as complete"}
