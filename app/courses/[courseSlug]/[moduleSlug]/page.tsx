@@ -41,59 +41,59 @@ export default async function ModulePage({ params }: ModulePageProps) {
   const lessonIds = courseModule.lessons.map((lesson) => lesson.id);
 
   return (
-    <main className="min-h-screen bg-background px-6 py-10 text-foreground sm:px-10 lg:px-16">
+    <main className="flex-1 bg-background px-6 py-10 text-foreground sm:px-10 lg:px-16">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-10">
-        <nav className="text-sm text-zinc-400">
-          <Link href="/" className="transition hover:text-[#e4d3bf]">
+        <nav className="text-sm text-foreground-muted">
+          <Link href="/" className="transition hover:text-accent">
             Home
           </Link>
-          <span className="mx-2 text-zinc-600">/</span>
-          <Link href="/courses" className="transition hover:text-[#e4d3bf]">
+          <span className="mx-2 text-border">/</span>
+          <Link href="/courses" className="transition hover:text-accent">
             Courses
           </Link>
-          <span className="mx-2 text-zinc-600">/</span>
+          <span className="mx-2 text-border">/</span>
           <Link
             href={`/courses/${course.slug}`}
-            className="transition hover:text-[#e4d3bf]"
+            className="transition hover:text-accent"
           >
             {course.title}
           </Link>
-          <span className="mx-2 text-zinc-600">/</span>
+          <span className="mx-2 text-border">/</span>
           <span>{courseModule.title}</span>
         </nav>
 
-        <section className="space-y-5">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#e4d3bf]">
+        <section className="space-y-4 border-b border-border pb-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-accent">
             Module {courseModule.order}
           </p>
-          <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h1 className="font-display max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             {courseModule.title}
           </h1>
-          <p className="max-w-2xl text-base leading-8 text-zinc-300">
+          <p className="max-w-2xl text-base leading-8 text-foreground-muted">
             Start with the first lesson, or jump directly to any lesson in this
             module.
           </p>
           <LocalProgressSummary lessonIds={lessonIds} />
         </section>
 
-        <section className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950/90 shadow-2xl shadow-black/30">
-          <ol className="divide-y divide-zinc-800">
+        <section>
+          <ol className="divide-y divide-border border-y border-border">
             {courseModule.lessons.map((lesson) => (
               <li key={lesson.id}>
                 <Link
                   href={`/courses/${course.slug}/${courseModule.slug}/${lesson.slug}`}
-                  className="flex items-center justify-between gap-4 p-6 transition hover:bg-zinc-900/70"
+                  className="flex items-center justify-between gap-4 py-6 transition hover:bg-surface-strong/40"
                 >
                   <div>
-                    <p className="text-sm font-medium uppercase tracking-[0.25em] text-zinc-500">
+                    <p className="text-sm font-medium uppercase tracking-[0.25em] text-foreground-muted">
                       Lesson {lesson.order}
                     </p>
-                    <h2 className="mt-2 text-xl font-semibold text-white">
+                    <h2 className="font-display mt-2 text-xl font-semibold text-foreground">
                       <LocalCompletionMark lessonId={lesson.id} />
                       {lesson.title}
                     </h2>
                   </div>
-                  <span className="text-sm font-semibold text-[#efe3d4]">
+                  <span className="shrink-0 text-sm font-semibold text-accent">
                     Read lesson
                   </span>
                 </Link>

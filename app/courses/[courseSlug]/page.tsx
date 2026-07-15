@@ -37,26 +37,26 @@ export default async function CoursePage({ params }: CoursePageProps) {
   );
 
   return (
-    <main className="min-h-screen bg-background px-6 py-10 text-foreground sm:px-10 lg:px-16">
+    <main className="flex-1 bg-background px-6 py-10 text-foreground sm:px-10 lg:px-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
-        <nav className="text-sm text-zinc-400">
-          <Link href="/" className="transition hover:text-[#e4d3bf]">
+        <nav className="text-sm text-foreground-muted">
+          <Link href="/" className="transition hover:text-accent">
             Home
           </Link>
-          <span className="mx-2 text-zinc-600">/</span>
-          <Link href="/courses" className="transition hover:text-[#e4d3bf]">
+          <span className="mx-2 text-border">/</span>
+          <Link href="/courses" className="transition hover:text-accent">
             Courses
           </Link>
-          <span className="mx-2 text-zinc-600">/</span>
+          <span className="mx-2 text-border">/</span>
           <span>{course.title}</span>
         </nav>
 
-        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div className="space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#e4d3bf]">
+        <section className="grid gap-6 border-b border-border pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div className="space-y-4">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-accent">
               Course
             </p>
-            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+            <h1 className="font-display max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               {course.title}
             </h1>
           </div>
@@ -65,53 +65,51 @@ export default async function CoursePage({ params }: CoursePageProps) {
           </div>
         </section>
 
-        <section className="grid gap-6">
+        <section className="divide-y divide-border">
           {course.modules.map((module) => (
             <article
               key={module.id}
-              className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950/90 shadow-2xl shadow-black/30"
+              className="grid gap-8 py-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12"
             >
-              <div className="grid gap-0 lg:grid-cols-[0.75fr_1.25fr]">
-                <div className="border-b border-zinc-800 bg-black p-8 lg:border-b-0 lg:border-r">
-                  <p className="text-sm font-medium uppercase tracking-[0.25em] text-[#e4d3bf]">
-                    Module {module.order}
-                  </p>
-                  <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">
-                    {module.title}
-                  </h2>
-                  <div className="mt-3">
-                    <LocalProgressSummary lessonIds={module.lessons.map((l) => l.id)} />
-                  </div>
-                  <Link
-                    href={`/courses/${course.slug}/${module.slug}`}
-                    className="mt-6 inline-flex h-11 items-center justify-center rounded-full border border-[#e4d3bf]/50 px-5 text-sm font-semibold text-[#efe3d4] transition hover:border-[#efe3d4] hover:text-[#f7efe5]"
-                  >
-                    View module
-                  </Link>
-                </div>
+              <div className="space-y-4">
+                <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">
+                  Module {module.order}
+                </p>
+                <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground">
+                  {module.title}
+                </h2>
+                <LocalProgressSummary
+                  lessonIds={module.lessons.map((l) => l.id)}
+                />
+                <Link
+                  href={`/courses/${course.slug}/${module.slug}`}
+                  className="inline-flex h-11 items-center justify-center rounded-lg border border-accent/50 px-5 text-sm font-semibold text-accent transition hover:border-accent hover:bg-accent/5"
+                >
+                  View module
+                </Link>
+              </div>
 
-                <div className="p-8">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-400">
-                    Lessons
-                  </h3>
-                  <ol className="mt-5 divide-y divide-zinc-800">
-                    {module.lessons.map((lesson) => (
-                      <li key={lesson.id} className="py-4">
-                        <Link
-                          href={`/courses/${course.slug}/${module.slug}/${lesson.slug}`}
-                          className="flex items-center justify-between gap-4 text-white transition hover:text-[#efe3d4]"
-                        >
-                          <span>
-                            {lesson.order}. {lesson.title}
-                          </span>
-                          <span className="text-sm text-zinc-500">
-                            Read lesson
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
+              <div>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-foreground-muted">
+                  Lessons
+                </h3>
+                <ol className="mt-4 divide-y divide-border">
+                  {module.lessons.map((lesson) => (
+                    <li key={lesson.id} className="py-3.5">
+                      <Link
+                        href={`/courses/${course.slug}/${module.slug}/${lesson.slug}`}
+                        className="flex items-center justify-between gap-4 text-foreground transition hover:text-accent"
+                      >
+                        <span>
+                          {lesson.order}. {lesson.title}
+                        </span>
+                        <span className="shrink-0 text-sm text-foreground-muted">
+                          Read
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </article>
           ))}

@@ -76,7 +76,7 @@ export function LocalProgressSummary({ lessonIds }: { lessonIds: string[] }) {
   const completed = lessonIds.filter((id) => completedLessonIds.has(id)).length;
 
   return (
-    <p className="text-sm font-medium text-[#efe3d4]">
+    <p className="text-sm font-medium text-accent">
       {completed} of {lessonIds.length} lessons complete
     </p>
   );
@@ -86,7 +86,7 @@ export function LocalCompletionMark({ lessonId }: { lessonId: string }) {
   const completedLessonIds = useCompletedLessonIds();
 
   return completedLessonIds.has(lessonId) ? (
-    <span className="mr-2 text-emerald-400" aria-label="Completed">
+    <span className="mr-2 text-success" aria-label="Completed">
       ✓
     </span>
   ) : null;
@@ -107,9 +107,15 @@ export function LocalLessonCompletion({ lessonId }: { lessonId: string }) {
 
   return (
     <>
-      <p className="text-sm font-medium text-zinc-300">
+      <p className="text-sm font-medium text-foreground-muted">
         {completed ? (
-          <span className={celebrating ? "celebrate inline-block text-emerald-400" : "text-emerald-400"}>
+          <span
+            className={
+              celebrating
+                ? "celebrate inline-block text-success"
+                : "text-success"
+            }
+          >
             ✓ You completed this lesson
           </span>
         ) : (
@@ -121,8 +127,8 @@ export function LocalLessonCompletion({ lessonId }: { lessonId: string }) {
         onClick={handleClick}
         className={
           completed
-            ? "inline-flex h-11 items-center justify-center rounded-full border border-zinc-700 px-5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:text-white"
-            : "inline-flex h-11 items-center justify-center rounded-full bg-[#e4d3bf] px-5 text-sm font-semibold text-zinc-950 transition hover:bg-[#efe3d4]"
+            ? "inline-flex h-11 items-center justify-center rounded-lg border border-border px-5 text-sm font-semibold text-foreground-muted transition hover:border-foreground-muted hover:text-foreground"
+            : "inline-flex h-11 items-center justify-center rounded-lg bg-accent px-5 text-sm font-semibold text-background transition hover:bg-accent-strong"
         }
       >
         {completed ? "Mark as not done" : "Mark as complete"}

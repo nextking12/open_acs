@@ -12,20 +12,20 @@ export function ProgressBar({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between text-sm">
-        <span className="font-medium text-zinc-300">
+        <span className="font-medium text-foreground-muted">
           {completed} of {total} lessons complete
         </span>
-        <span className="text-zinc-400">{percent}%</span>
+        <span className="text-foreground-muted/80">{percent}%</span>
       </div>
       <div
-        className="h-2 w-full overflow-hidden rounded-full bg-zinc-800"
+        className="h-1.5 w-full overflow-hidden rounded-sm bg-surface-strong"
         role="progressbar"
         aria-valuenow={percent}
         aria-valuemin={0}
         aria-valuemax={100}
       >
         <div
-          className="h-full rounded-full bg-[#e4d3bf] transition-all"
+          className="h-full rounded-sm bg-accent transition-all duration-500"
           style={{ width: `${percent}%` }}
         />
       </div>

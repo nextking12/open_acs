@@ -4,9 +4,9 @@
 @import "highlight.js/styles/github-dark.css";
 
 :root {
-  --background: #000000;
-  --surface: #0a0a0a;
-  --surface-strong: #121212;
+  --background: #070707;
+  --surface: #0c0c0c;
+  --surface-strong: #141414;
   --border: #2a2a2a;
   --foreground: #f5f1eb;
   --foreground-muted: #b6aa9b;
@@ -25,14 +25,31 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-success: var(--success);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+/* Facility schematic atmosphere */
+.atmosphere-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--accent) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--accent) 8%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, black 20%, transparent 75%);
 }
 
 @keyframes celebrate {
@@ -51,4 +68,78 @@ body {
 
 .celebrate {
   animation: celebrate 0.5s ease-out;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes schematic-draw {
+  from {
+    opacity: 0;
+    stroke-dashoffset: 120;
+  }
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 0.7s ease-out both;
+}
+
+.hero-rise-delay-1 {
+  animation: hero-rise 0.7s ease-out 0.12s both;
+}
+
+.hero-rise-delay-2 {
+  animation: hero-rise 0.7s ease-out 0.24s both;
+}
+
+.hero-rise-delay-3 {
+  animation: hero-rise 0.7s ease-out 0.36s both;
+}
+
+.hero-graphic {
+  animation: hero-fade 1.2s ease-out both;
+}
+
+.hero-graphic path,
+.hero-graphic rect,
+.hero-graphic circle,
+.hero-graphic line {
+  stroke-dasharray: 120;
+  animation: schematic-draw 1.4s ease-out 0.2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise,
+  .hero-rise-delay-1,
+  .hero-rise-delay-2,
+  .hero-rise-delay-3,
+  .hero-graphic,
+  .hero-graphic path,
+  .hero-graphic rect,
+  .hero-graphic circle,
+  .hero-graphic line,
+  .celebrate {
+    animation: none;
+  }
 }
